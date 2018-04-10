@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:17:28 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 16:11:30 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/09 16:40:20 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ t_input	*create_input()
 	input->path = 0;
 	input->entrance = 0;
 	input->exit = 0;
-	input->ent_cord[0] = 0;
-	input->exit_cord[0] = 0;
-	input->ent_cord[1] = 0;
-	input->exit_cord[1] = 0;
+	input->ent_cord[0] = -1;
+	input->ent_cord[1] = -1;
+	input->num_exits = 0;
 	return (input);
 }
 

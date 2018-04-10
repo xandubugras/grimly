@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:05:19 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 16:13:38 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/09 16:50:44 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	**read_map(char *filename, t_input **inp)
 	get_next_line(fd, &input);
 	if ((info = set_input(input)) == 0)
 		return (0);
-	print_input(info);
 	free(input);
 	if (!(grid = set_grid(fd, info)))
 		return (0);
@@ -56,6 +55,11 @@ char	**set_grid(int fd, t_input *input)
 		grid[i] = line;
 		i++;
 	}
+	if (input->ent_cord[0] == -1 || !input->num_exits)
+		return (0);
+	if (ft_strchr(grid[0], input->empty) ||
+		ft_strchr(grid[input->height - 1], input->empty))
+		return (0);
 	return (grid);
 }
 
@@ -69,22 +73,21 @@ int		check_line(char *line, t_input *input, int h)
 		if (line[i] != input->full && line[i] != input->empty &&
 				line[i] != input->entrance && line[i] != input->exit)
 			return (1);
-		if (line[i] == input->exit)
-		{
-			if (input->exit_cord[0] != 0)
-				return (1);
-			input->exit_cord[0] = h;
-			input->exit_cord[1] = i;
-		}
 		if (line[i] == input->entrance)
 		{
-			if (input->ent_cord[0] != 0)
+			if (input->ent_cord[0] != -1)
 				return (1);
 			input->ent_cord[0] = h;
 			input->ent_cord[1] = i;
+			if (h != 0 && i != 0 && h != input->height - 1 && i != input->width - 1)
+				return (1);
 		}
+		if (line[i] == input->exit)
+			input->num_exits++;
 		i++;
 	}
+	if (line[0] == input->empty || line[input->width - 1] == input->empty)
+		return (1);
 	return (0);
 }
 

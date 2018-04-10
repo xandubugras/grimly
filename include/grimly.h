@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 10:45:02 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 16:12:31 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/09 16:39:45 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 
 typedef struct	s_input
 {
-	int height;
-	int	width;
-	char full;
-	char empty;
-	char path;
-	char entrance;
-	int	ent_cord[2];
-	char exit;
-	int	exit_cord[2];
+	int		height;
+	int		width;
+	char	full;
+	char	empty;
+	char	path;
+	char	entrance;
+	int		ent_cord[2];
+	char	exit;
+	char	num_exits;
 }				t_input;
 
 char	**read_map(char *filename, t_input **inp);
