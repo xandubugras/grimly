@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 10:45:02 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/10 11:09:51 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 16:18:55 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,37 @@ typedef struct	s_solver
 {
 	int		x;
 	int		y;
-	int 	steps;
+	int		steps;
 	int		curr_steps;
 	char	*loc;
 	char	**winning_map;
 }				t_solver;
 
-char	**read_map(char *filename, t_input **inp);
+char			**read_map(char *filename, t_input **inp);
 
-char	**set_grid(int fd, t_input *input);
+char			**set_grid(int fd, t_input *input);
 
-int		check_line(char *line, t_input *input, int h);
+int				check_line(char *line, t_input *input, int h);
 
-t_solver    *create_solver(t_input *input);
+t_solver		*create_solver(t_input *input);
 
-t_input	*set_input(t_input *input);
+t_input			*set_input(t_input *input);
 
-void	set_characters(t_input *input);
+void			set_characters(t_input *input);
 
-int		test_input(t_input *input);
+int				test_input(t_input *input);
 
-t_input	*create_input();
+t_input			*create_input();
 
-void	print_grid(char **grid, int height);
+void			print_grid(char **grid, int height);
 
-void	free_grid(char **grid, int height);
+void			free_grid(char **grid, int height);
 
-void	print_input(t_input *input);
+void			print_input(t_input *input);
 
-char	**copy_grid(char **map, t_input *input);
+char			**copy_grid(char **map, t_input *input);
 
-void	check_exit(char **map, t_solver *s, t_input *input);
+void			check_exit(char **map, t_solver *s, t_input *input);
 
-void	solve_map(char **map, t_solver *s, t_input *input);
+void			solve_map(char **map, t_solver *s, t_input *input);
 #endif
