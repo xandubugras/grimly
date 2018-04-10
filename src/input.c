@@ -6,18 +6,19 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:17:28 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 16:40:20 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/09 20:57:08 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/grimly.h"
 
-t_input	*create_input()
+t_input		*create_input()
 {
 	t_input *input;
 
 	if ((input = malloc(sizeof(t_input))) == 0)
 		return (0);
+	input->full_input = 0;
 	input->height = 0;
 	input->width = 0;
 	input->full = 0;
@@ -31,6 +32,20 @@ t_input	*create_input()
 	return (input);
 }
 
+t_solver	*create_solver(t_input *input)
+{
+	t_solver	*solver;
+
+	if ((solver = malloc(sizeof(t_solver))) == 0)
+		return (0);
+	solver->y = input->ent_cord[0];
+	solver->x = input->ent_cord[1];
+	solver->steps = 0;
+	solver->curr_steps = 0;
+	solver->loc = 0;
+	solver->winning_map = 0;
+	return (solver);
+}
 void	print_input(t_input *input)
 {
 	ft_printf("height: %d\n", input->height);

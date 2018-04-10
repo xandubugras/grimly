@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 10:43:46 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 16:00:59 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/09 21:04:46 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,29 @@ int		main(int argc, char **argv)
 	int		i;
 	char	**grid;
 	t_input	*input;
+	t_solver *solver;
 
 	if (argc == 1)
 	{
 		if ((grid = read_map(0, &input)) == 0)
 			ft_printf("MAP ERROR\n");
 		else
-			ft_printf("HI\n");
+		{
+			solver = create_solver(input);
+			solve_map(grid, solver, input);
+			free_grid(grid, input->height);
+			if ((grid = solver->winning_map) == 0)
+				ft_printf("MAP ERROR\n");
+			else
+			{
+				ft_printf("%s\n", input->full_input);
+				print_grid(grid, input->height);
+				ft_printf("RESULT IN %d STEPS!\n", solver->curr_steps);
+				free_grid(grid, input->height);
+			}
+			free(solver);
+			free(input);
+		}
 	}
 	else
 	{
@@ -31,12 +47,24 @@ int		main(int argc, char **argv)
 		while (i < argc)
 		{
 			if ((grid = read_map(argv[i], &input)) == 0)
+			{
 				ft_printf("MAP ERROR\n");
+			}
 			else
 			{
-			//	grid = solve_map(grid);
-				print_grid(grid, input->height);
+				solver = create_solver(input);
+				solve_map(grid, solver, input);
 				free_grid(grid, input->height);
+				if ((grid = solver->winning_map) == 0)
+					ft_printf("MAP ERROR\n");
+				else
+				{
+					ft_printf("%s\n", input->full_input);
+					print_grid(grid, input->height);
+					ft_printf("RESULT IN %d STEPS!\n", solver->curr_steps);
+					free_grid(grid, input->height);
+				}
+				free(solver);
 				free(input);
 			}
 			i++;

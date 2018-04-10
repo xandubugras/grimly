@@ -6,7 +6,7 @@
 #    By: adubugra <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/07 18:20:10 by adubugra          #+#    #+#              #
-#    Updated: 2018/04/09 11:32:22 by adubugra         ###   ########.fr        #
+#    Updated: 2018/04/09 20:38:06 by adubugra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME	= grimly
 # src / obj files
 SRC		= main.c \
 		  read.c \
+		  solve.c \
 		  input.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))

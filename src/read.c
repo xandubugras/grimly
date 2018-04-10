@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:05:19 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 16:50:44 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/09 21:10:44 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ char	**read_map(char *filename, t_input **inp)
 
 	if (!filename)
 		fd = 0;
-	else
-	{
-		if ((fd = open(filename, O_RDONLY)) < 0)
-			return (0);
-	}
+	else if ((fd = open(filename, O_RDONLY)) < 0)
+		return (0);
 	get_next_line(fd, &input);
+	ft_printf("input: %s\n", input);
 	if ((info = set_input(input)) == 0)
 		return (0);
 	free(input);
@@ -42,7 +40,7 @@ char	**set_grid(int fd, t_input *input)
 	char	**grid;
 	int		i;
 
-	grid = malloc(sizeof(int *) * input->height);
+	grid = malloc(sizeof(char *) * input->height);
 	i = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
