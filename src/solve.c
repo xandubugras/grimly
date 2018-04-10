@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:23:28 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 21:02:19 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/09 21:13:42 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 **recursively calls to that spot. 
 **if it finds a exit, checks if it is better
 **than the current and if true,  saves it. keeps going looking for
-**better solutions until it exhausts all possibilities
-**
+**better solutions until it exhausts all possibilities.
+**stops if curr number of steps is greater than the solution already found.
 */
 
 void	solve_map(char **map, t_solver *s, t_input *input)

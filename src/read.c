@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:05:19 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 21:10:44 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/09 21:26:55 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 char	**read_map(char *filename, t_input **inp)
 {
 	int		fd;
-	char	*input;
 	char	**grid;
-	t_input	*info;
+	t_input	*input;
 
 	if (!filename)
 		fd = 0;
 	else if ((fd = open(filename, O_RDONLY)) < 0)
 		return (0);
-	get_next_line(fd, &input);
-	ft_printf("input: %s\n", input);
-	if ((info = set_input(input)) == 0)
+	if ((input = create_input()) == 0)
 		return (0);
-	free(input);
-	if (!(grid = set_grid(fd, info)))
+	get_next_line(fd, &(input->full_input));
+	if (!set_input(input))
+	{
+		free(input);
 		return (0);
-	*inp = info;
+	}
+	if (!(grid = set_grid(fd, input)))
+		return (0);
+	*inp = input;
 	return (grid);
 }
 
@@ -89,35 +91,37 @@ int		check_line(char *line, t_input *input, int h)
 	return (0);
 }
 
-t_input	*set_input(char *input)
+t_input	*set_input(t_input *input)
 {
-	t_input	*info;
+	char	*tmp;
 
-	if (!(info = create_input()))
+	tmp = input->full_input;
+	if ((input->height = ft_atoi(input->full_input)) == 0)
 		return (0);
-	if ((info->height = ft_atoi(input)) == 0)
+	while (ft_isdigit(*(input->full_input)))
+		(input->full_input)++;
+	if (*(input->full_input) != 'x')
 		return (0);
-	if ((input = ft_strchr(input, 'x')) == 0)
+	(input->full_input)++;
+	if ((input->width = ft_atoi(input->full_input)) == 0)
 		return (0);
-	input++;
-	if ((info->width = ft_atoi(input)) == 0)
+	while (ft_isdigit(*(input->full_input)))
+		(input->full_input)++;
+	if (ft_strlen(input->full_input) != 5)
 		return (0);
-	while (ft_isdigit(*input))
-		input++;
-	if (ft_strlen(input) != 5)
+	input->full = *(input->full_input);
+	(input->full_input)++;
+	input->empty = *(input->full_input);
+	(input->full_input)++;
+	input->path = *(input->full_input);
+	(input->full_input)++;
+	input->entrance = *(input->full_input);
+	(input->full_input)++;
+	input->exit = *(input->full_input);
+	if (test_input(input))
 		return (0);
-	info->full = *input;
-	input++;
-	info->empty = *input;
-	input++;
-	info->path = *input;
-	input++;
-	info->entrance = *input;
-	input++;
-	info->exit = *input;
-	if (test_input(info))
-		return (0);
-	return (info);
+	input->full_input = tmp;
+	return (input);
 }
 
 void	print_grid(char **grid, int height)
