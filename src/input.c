@@ -6,13 +6,13 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:17:28 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 20:57:08 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:19:00 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/grimly.h"
 
-t_input		*create_input()
+t_input		*create_input(void)
 {
 	t_input *input;
 
@@ -46,7 +46,8 @@ t_solver	*create_solver(t_input *input)
 	solver->winning_map = 0;
 	return (solver);
 }
-void	print_input(t_input *input)
+
+void		print_input(t_input *input)
 {
 	ft_printf("height: %d\n", input->height);
 	ft_printf("width: %d\n", input->width);
@@ -57,7 +58,7 @@ void	print_input(t_input *input)
 	ft_printf("exit: %c\n", input->exit);
 }
 
-int		test_input(t_input *input)
+int			test_input(t_input *input)
 {
 	if (input->full == input->empty || input->full == input->path ||
 			input->full == input->entrance || input->full == input->exit)

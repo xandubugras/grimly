@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 10:45:02 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 21:18:46 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:09:51 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int		check_line(char *line, t_input *input, int h);
 t_solver    *create_solver(t_input *input);
 
 t_input	*set_input(t_input *input);
+
+void	set_characters(t_input *input);
 
 int		test_input(t_input *input);
 

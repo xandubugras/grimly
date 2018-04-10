@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:05:19 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/09 21:26:55 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 11:31:42 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int		check_line(char *line, t_input *input, int h)
 				return (1);
 			input->ent_cord[0] = h;
 			input->ent_cord[1] = i;
-			if (h != 0 && i != 0 && h != input->height - 1 && i != input->width - 1)
+			if (h != 0 && i != 0 && h != input->height - 1 &&
+				i != input->width - 1)
 				return (1);
 		}
 		if (line[i] == input->exit)
@@ -107,8 +108,17 @@ t_input	*set_input(t_input *input)
 		return (0);
 	while (ft_isdigit(*(input->full_input)))
 		(input->full_input)++;
-	if (ft_strlen(input->full_input) != 5)
+	if (ft_strlen(input->full_input) < 5)
 		return (0);
+	set_characters(input);
+	if (test_input(input))
+		return (0);
+	input->full_input = tmp;
+	return (input);
+}
+
+void	set_characters(t_input *input)
+{
 	input->full = *(input->full_input);
 	(input->full_input)++;
 	input->empty = *(input->full_input);
@@ -118,20 +128,4 @@ t_input	*set_input(t_input *input)
 	input->entrance = *(input->full_input);
 	(input->full_input)++;
 	input->exit = *(input->full_input);
-	if (test_input(input))
-		return (0);
-	input->full_input = tmp;
-	return (input);
-}
-
-void	print_grid(char **grid, int height)
-{
-	int i;
-
-	i = 0;
-	while (i < height)
-	{
-		ft_printf("%s\n", grid[i]);
-		i++;
-	}
 }
