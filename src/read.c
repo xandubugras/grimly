@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:05:19 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/10 11:31:42 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 18:31:12 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	**read_map(char *filename, t_input **inp)
 	if (!(grid = set_grid(fd, input)))
 		return (0);
 	*inp = input;
+	close(fd);
 	return (grid);
 }
 

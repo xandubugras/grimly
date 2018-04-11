@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 10:43:46 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/10 11:35:37 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 18:32:57 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	solve(char **grid, t_input *input)
 		ft_printf("%s\n", input->full_input);
 		print_grid(grid, input->height);
 		ft_printf("RESULT IN %d STEPS!\n", solver->curr_steps);
-		free_grid(grid, input->height);
 	}
+	free_grid(grid, input->height);
 	free(solver);
+	free(input->full_input);
 	free(input);
 }
 
@@ -64,11 +65,14 @@ void	free_grid(char **grid, int height)
 	int i;
 
 	i = 0;
+	if (!grid)
+		return ;
 	while (i < height)
 	{
 		free(grid[i]);
 		i++;
 	}
+	free(grid);
 }
 
 void	print_grid(char **grid, int height)

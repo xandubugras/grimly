@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:23:28 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/10 11:18:01 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 18:27:53 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void	check_exit(char **map, t_solver *s, t_input *input)
 		if (s->steps < s->curr_steps || s->curr_steps == 0)
 		{
 			s->curr_steps = s->steps;
-			if (s->winning_map)
-				free_grid(s->winning_map, input->height);
+			free_grid(s->winning_map, input->height);
 			s->winning_map = copy_grid(map, input);
 		}
 	}
