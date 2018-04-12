@@ -6,17 +6,17 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:23:28 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/11 19:27:45 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/11 19:45:33 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/grimly.h"
 #define EMPTY(x) x == input->empty
 #define EXIT(x) x == input->exit
-#define UP 1
-#define RIGHT 2
-#define LEFT 3
-#define DOWN 4
+#define UP -1
+#define RIGHT -2
+#define LEFT -3
+#define DOWN -4
 
 void	draw_back(char **map, t_elem *el, t_input *input)
 {
