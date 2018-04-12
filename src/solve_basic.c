@@ -6,17 +6,13 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:23:28 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/10 21:34:55 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 18:27:53 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/grimly.h"
 #define EMPTY(x) x == input->empty
 #define EXIT(x) x == input->exit
-#define UP 1
-#define RIGHT 2
-#define LEFT 3
-#define DOWN 4
 
 /*
 **tries to move up>right>left>down. If there is a vacancy, fills the map and
@@ -25,13 +21,6 @@
 **than the current and if true,  saves it. keeps going looking for
 **better solutions until it exhausts all possibilities.
 **stops if curr number of steps is greater than the solution already found.
-	create an element from the beginning for every coordinate
-	set the parent to the one it came from
-	enqueue all of them in the proper order
-	dequeues until it finds one adjacent to an exit
-	draws the map following the parent path
-	frees everything
-	prints map
 */
 
 void	solver(t_solver *s, char **map, t_input *input, int *i)
@@ -52,11 +41,6 @@ void	solve_map(char **map, t_solver *s, t_input *input)
 	if (s->curr_steps > 0 && s->steps > s->curr_steps)
 		return ;
 	check_exit(map, s, input);
-
-
-
-
-
 	if (s->y > 0 && (EMPTY(map[s->y - 1][s->x])))
 		solver(s, map, input, &(s->y));
 	if (s->x > 0 && EMPTY(map[s->y][s->x - 1]))
@@ -75,7 +59,7 @@ void	solve_map(char **map, t_solver *s, t_input *input)
 	}
 }
 
-int		check_exit(char **map, t_solver *s, t_input *input)
+void	check_exit(char **map, t_solver *s, t_input *input)
 {
 	if ((s->y > 0 && EXIT(map[s->y - 1][s->x])) ||
 	(s->x > 0 && EXIT(map[s->y][s->x - 1])) ||
@@ -87,10 +71,8 @@ int		check_exit(char **map, t_solver *s, t_input *input)
 			s->curr_steps = s->steps;
 			free_grid(s->winning_map, input->height);
 			s->winning_map = copy_grid(map, input);
-			return (1);
 		}
 	}
-	return (0);
 }
 
 char	**copy_grid(char **map, t_input *input)

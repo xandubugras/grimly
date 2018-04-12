@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:05:19 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/10 18:31:12 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/10 19:19:26 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ char	**set_grid(int fd, t_input *input)
 	}
 	if (input->ent_cord[0] == -1 || !input->num_exits)
 		return (0);
-	if (ft_strchr(grid[0], input->empty) ||
-		ft_strchr(grid[input->height - 1], input->empty))
-		return (0);
 	return (grid);
 }
 
@@ -88,8 +85,6 @@ int		check_line(char *line, t_input *input, int h)
 			input->num_exits++;
 		i++;
 	}
-	if (line[0] == input->empty || line[input->width - 1] == input->empty)
-		return (1);
 	return (0);
 }
 
