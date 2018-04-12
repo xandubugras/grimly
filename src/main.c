@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 10:43:46 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/11 13:15:02 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/11 19:27:12 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 
 void	solve(char **grid, t_input *input)
 {
-	t_solver	*solver;
-
-	solver = create_solver(input);
-	solve_map(grid, solver, input);
-	free_grid(grid, input->height);
-	if ((grid = solver->winning_map) == 0)
-		ft_putstr_fd("MAP ERROR\n", 2);
-	else
+	if (solve_map(grid, input))
 	{
 		ft_printf("%s\n", input->full_input);
 		print_grid(grid, input->height);
-		ft_printf("RESULT IN %d STEPS!\n", solver->curr_steps);
+		ft_printf("RESULT IN %d STEPS!\n", input->steps);
 	}
+	else
+		ft_putstr_fd("MAP ERROR\n", 2);
 	free_grid(grid, input->height);
-	free(solver);
 	free(input->full_input);
 	free(input);
 }

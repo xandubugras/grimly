@@ -6,7 +6,7 @@
 /*   By: adubugra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:05:19 by adubugra          #+#    #+#             */
-/*   Updated: 2018/04/10 19:19:26 by adubugra         ###   ########.fr       */
+/*   Updated: 2018/04/11 19:23:15 by adubugra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,17 @@ t_input	*set_input(t_input *input)
 	char	*tmp;
 
 	tmp = input->full_input;
-	if ((input->height = ft_atoi(input->full_input)) == 0)
+	if ((input->height = ft_atoi(input->full_input)) <= 0)
 		return (0);
 	while (ft_isdigit(*(input->full_input)))
 		(input->full_input)++;
 	if (*(input->full_input) != 'x')
 		return (0);
 	(input->full_input)++;
-	if ((input->width = ft_atoi(input->full_input)) == 0)
+	if ((input->width = ft_atoi(input->full_input)) <= 0)
+		return (0);
+	if (input->width * input->height > 1000000000 ||
+			input->width * input->height < 0)
 		return (0);
 	while (ft_isdigit(*(input->full_input)))
 		(input->full_input)++;
